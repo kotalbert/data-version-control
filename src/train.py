@@ -7,6 +7,16 @@ from skimage.io import imread_collection
 from skimage.transform import resize
 from sklearn.linear_model import SGDClassifier
 
+# todo: put constants to config file
+MAX_ITER = 100
+
+# todo: remove magic constants
+# todo: check code with pylint
+# todo: add docstrings 
+# todo: add dvc api
+# todo: add unit tests
+# todo: set remote to s3
+# todo: configure github actions 
 
 def load_images(data_frame, column_name):
     filelist = data_frame[column_name].to_list()
@@ -37,7 +47,7 @@ def load_data(data_path):
 def main(repo_path):
     train_csv_path = repo_path / "data/prepared/train.csv"
     train_data, labels = load_data(train_csv_path)
-    sgd = SGDClassifier(max_iter=10)
+    sgd = SGDClassifier(max_iter=MAX_ITER)
     trained_model = sgd.fit(train_data, labels)
     dump(trained_model, repo_path / "model/model.joblib")
 
